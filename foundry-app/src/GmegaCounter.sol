@@ -5,7 +5,7 @@ contract GmegaCounter {
     uint256 public gmegaCount;
 
 
-    function increment() public {
+    function sayGmega() public {
         gmegaCount++;
     }
 }

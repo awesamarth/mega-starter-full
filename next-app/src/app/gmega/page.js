@@ -1,6 +1,9 @@
 "use client";
 import Navbar from '@/components/Navbar';
 import { useState, useEffect } from 'react';
+import { GMEGA_CONTRACT_ABI, LOCAL_GMEGA_CONTRACT_ADDRESS, MEGA_GMEGA_CONTRACT_ADDRESS } from '@/constants';
+import { useReadContract, useWriteContract, useSwitchChain, useWaitForTransactionReceipt } from 'wagmi';
+import { foundry, sepolia } from 'viem/chains';
 
 const TabButton = ({ active, onClick, children }) => (
     <button
@@ -13,27 +16,78 @@ const TabButton = ({ active, onClick, children }) => (
 );
 
 export default function Counter() {
-    const [activeTab, setActiveTab] = useState('local');
-    const [count, setCount] = useState(0);
+    const [activeTab, setActiveTab] = useState('mega');
+    const { switchChain, chains } = useSwitchChain();
+    const { writeContractAsync } = useWriteContract();
+    const [txHash, setTxHash] = useState();
+    
+    // This will track the transaction and wait for it to be confirmed
+    const { data: receipt, isSuccess: isTxConfirmed } = useWaitForTransactionReceipt({
+        hash: txHash,
+    });
+    
+    // This reads the contract data
+    const { data: countData, refetch: refetchCount } = useReadContract({
+        address: activeTab === 'local' ? LOCAL_GMEGA_CONTRACT_ADDRESS : MEGA_GMEGA_CONTRACT_ADDRESS,
+        abi: GMEGA_CONTRACT_ABI,
+        functionName: 'gmegaCount'
+    });
+    useEffect(() => {
+        if (activeTab === 'local') {
+            console.log(activeTab)
+            switchChain({ chainId: foundry.id })
+        } else {
+            switchChain({ chainId: sepolia.id })
+        }
+    }, [activeTab, switchChain]); 
 
 
+    
+    // Refetch when a transaction is confirmed
+    useEffect(() => {
+        if (isTxConfirmed) {
+            refetchCount();
+            setTxHash(undefined); // Clear the hash after we've confirmed it
+        }
+    }, [isTxConfirmed, refetchCount]);
+
+    const sayGmega = async () => {
+        try {
+            const result = await writeContractAsync({
+                address: activeTab === 'local' ? LOCAL_GMEGA_CONTRACT_ADDRESS : MEGA_GMEGA_CONTRACT_ADDRESS,
+                abi: GMEGA_CONTRACT_ABI,
+                functionName: 'sayGmega'
+            });
+            
+            console.log("Transaction submitted:", result);
+            setTxHash(result); // Store the transaction hash to track it
+            
+            // For local chains, we can just refetch immediately as well
+            if (activeTab === 'local') {
+                setTimeout(() => refetchCount(), 1000);
+            }
+        } catch (error) {
+            console.error("Error saying gmega:", error);
+        }
+    };
 
     return (
         <main className="flex flex-col items-center h-screen pt-36 bg-[#e5e5e5]">
             <Navbar />
             <div className="flex-1 flex flex-col items-center justify-center -mt-20">
                 <div className="flex gap-4 mb-9">
-                    <TabButton
-                        active={activeTab === 'local'}
-                        onClick={() => setActiveTab('local')}
-                    >
-                        Local
-                    </TabButton>
+
                     <TabButton
                         active={activeTab === 'mega'}
                         onClick={() => setActiveTab('mega')}
                     >
                         Mega
+                    </TabButton>
+                    <TabButton
+                        active={activeTab === 'local'}
+                        onClick={() => setActiveTab('local')}
+                    >
+                        Local
                     </TabButton>
                 </div>
 
@@ -49,14 +103,15 @@ export default function Counter() {
                         </p>
                     )}
                     <div className="bg-white/50 rounded-2xl p-12 shadow-sm mb-8 min-w-[400px] min-h-[250px] flex justify-center items-center">
-                        <span className="text-8xl text-black font-bold">{count}</span>
+                        <span className="text-8xl text-black font-bold">{countData}</span>
                     </div>
 
                     <button
-                        className="bg-black  cursor-pointer text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-black/80 transition-all duration-300"
-                        onClick={() => setCount(prev => prev + 1)}
+                        className="bg-black cursor-pointer text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-black/80 transition-all duration-300"
+                        onClick={sayGmega}
+                        disabled={!!txHash && activeTab === 'mega'} // Disable during Sepolia transactions
                     >
-                        say gmega!
+                        {txHash && activeTab === 'mega' ? 'Confirming...' : 'say gmega!'}
                     </button>
                 </div>
             </div>

@@ -31,7 +31,7 @@ mega dev
 ### Locally
 Make sure you are in the root directory and run the following command: 
 ```shell
-mega deploy foundry-app/src/<name-of-contract-file>.sol:<name-of-contract> --broadcast
+mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --broadcast
 ```
 This command will use the first account provided by Anvil to deploy your contract to the local blockchain. If you edited the contract before deploying, copy the address you see in the terminal (deployed to: 0x....) and paste it in next-app/src/constants/index.js as the value of the LOCAL_GMEGA_CONTRACT_ADDRESS variable for changes to be visible on the frontend. You will also have to get the new contract ABI which you'll find in `out/<contract-name>.json`. Now you can interact with the locally deployed smart contract using the Next.js app!
 
