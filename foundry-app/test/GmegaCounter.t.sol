@@ -15,5 +15,4 @@ contract CounterTest is Test {
         gmegaCounter.increment();
         assertEq(gmegaCounter.gmegaCount(), 1);
     }
-
 }

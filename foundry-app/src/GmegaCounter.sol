@@ -4,7 +4,6 @@ pragma solidity ^0.8.13;
 contract GmegaCounter {
     uint256 public gmegaCount;
 
-
     function sayGmega() public {
         gmegaCount++;
     }
