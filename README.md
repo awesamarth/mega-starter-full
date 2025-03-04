@@ -58,4 +58,4 @@ Point your terminal to the root directory and run `source .env.local` in the ter
 mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --private-key $DEV_PRIVATE_KEY --broadcast --testnet
 ```
 
-Congratulations! Your smart contract is now deployed on MegaETH testnet. Copy the address you see in the terminal and paste it in next-app/src/constants/index.js as the value of the MEGA_GMEGA_CONTRACT_ADDRESS variable for changes to reflect on the frontend. Now you can interact with the deployed smart contract on Morph using the Next.js app!
+Congratulations! Your smart contract is now deployed on MegaETH testnet. Copy the address you see in the terminal and paste it in next-app/src/constants/index.js as the value of the MEGA_GMEGA_CONTRACT_ADDRESS variable for changes to reflect on the frontend. Now you can interact with the deployed smart contract on Mega using the Next.js app!
