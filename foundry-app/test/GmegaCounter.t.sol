@@ -12,7 +12,7 @@ contract CounterTest is Test {
     }
 
     function test_Increment() public {
-        gmegaCounter.increment();
+        gmegaCounter.sayGmega();
         assertEq(gmegaCounter.gmegaCount(), 1);
     }
 }
