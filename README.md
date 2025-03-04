@@ -7,11 +7,11 @@ By default, this app is set up to interact with a smart contract deployed on Meg
 ## Getting Started
 Install the Mega CLI if you don't have it already
 ```shell
-npm install -g mega-cli
+npm install -g megaeth-cli
 #or
-pnpm add -g mega-cli
+pnpm add -g megaeth-cli
 #or
-yarn global add mega-cli
+yarn global add megaeth-cli
 ```
 
 Create a new `.env` or `.env.local` file in `next-app` and put your Reown Project ID there. Refer to `next-app/.env.example` for more details.
