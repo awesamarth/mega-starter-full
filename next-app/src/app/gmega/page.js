@@ -71,6 +71,9 @@ export default function Counter() {
         }
     };
 
+    // Check if local contract address is empty
+    const isLocalContractMissing = activeTab === 'local' && countData == undefined
+
     return (
         <main className="flex flex-col items-center h-screen pt-36 bg-[#e5e5e5]">
             <Navbar />
@@ -102,17 +105,28 @@ export default function Counter() {
                             pre-deployed on MegaETH testnet.
                         </p>
                     )}
-                    <div className="bg-white/50 rounded-2xl p-12 shadow-sm mb-8 min-w-[400px] min-h-[250px] flex justify-center items-center">
-                        <span className="text-8xl text-black font-bold">{countData}</span>
-                    </div>
 
-                    <button
-                        className="bg-black cursor-pointer text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-black/80 transition-all duration-300"
-                        onClick={sayGmega}
-                        disabled={!!txHash && activeTab === 'mega'} // Disable during Sepolia transactions
-                    >
-                        {txHash && activeTab === 'mega' ? 'Confirming...' : 'say gmega!'}
-                    </button>
+                    {isLocalContractMissing ? (
+                        <div className=" rounded-2xl p-12  mb-8 min-w-[400px] min-h-[250px] flex justify-center items-center">
+                            <p className="text-black text-center text-lg font-medium">
+                                Locally deployed contract not found. Refer to the readme to learn how you can deploy contracts locally
+                            </p>
+                        </div>
+                    ) : (
+                        <>
+                            <div className="bg-white/50 rounded-2xl p-12 shadow-sm mb-8 min-w-[400px] min-h-[250px] flex justify-center items-center">
+                                <span className="text-8xl text-black font-bold">{countData}</span>
+                            </div>
+
+                            <button
+                                className="bg-black cursor-pointer text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-black/80 transition-all duration-300"
+                                onClick={sayGmega}
+                                disabled={!!txHash && activeTab === 'mega'} // Disable during Sepolia transactions
+                            >
+                                {txHash && activeTab === 'mega' ? 'Confirming...' : 'say gmega!'}
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </main>

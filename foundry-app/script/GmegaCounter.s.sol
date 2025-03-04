@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import {Script, console} from "forge-std/Script.sol";
 import {GmegaCounter} from "../src/GmegaCounter.sol";
 
-contract CounterScript is Script {
+contract GmegaCounterScript is Script {
     GmegaCounter public gmegaCounter;
 
     function setUp() public {}
