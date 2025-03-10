@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import { useState, useEffect } from 'react';
 import { GMEGA_CONTRACT_ABI, LOCAL_GMEGA_CONTRACT_ADDRESS, MEGA_GMEGA_CONTRACT_ADDRESS } from '@/constants';
 import { useReadContract, useWriteContract, useSwitchChain, useWaitForTransactionReceipt } from 'wagmi';
-import { foundry, sepolia } from 'viem/chains';
+import { foundry, megaethTestnet } from 'viem/chains';
 
 const TabButton = ({ active, onClick, children }) => (
     <button
@@ -37,7 +37,7 @@ export default function Counter() {
             console.log(activeTab)
             switchChain({ chainId: foundry.id })
         } else {
-            switchChain({ chainId: sepolia.id })
+            switchChain({ chainId: megaethTestnet.id })
         }
     }, [activeTab, switchChain]); 
 
@@ -121,7 +121,7 @@ export default function Counter() {
                             <button
                                 className="bg-black cursor-pointer text-white px-8 py-3 rounded-md text-lg font-medium hover:bg-black/80 transition-all duration-300"
                                 onClick={sayGmega}
-                                disabled={!!txHash && activeTab === 'mega'} // Disable during Sepolia transactions
+                                disabled={!!txHash && activeTab === 'mega'} 
                             >
                                 {txHash && activeTab === 'mega' ? 'Confirming...' : 'say gmega!'}
                             </button>

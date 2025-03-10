@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Image from "next/image";
 import Link from "next/link";
 import { useAccount, useChainId, useSwitchChain } from "wagmi";
-import { sepolia  } from "viem/chains";
+import { megaethTestnet  } from "viem/chains";
 
 
 
@@ -43,12 +43,12 @@ export default function Home() {
             start interacting with smart contracts right away :&#41;
           </div>
         }{" "}
-        {address && chainId == sepolia.id && 
+        {address && chainId == megaethTestnet.id && 
           <div className="mt-4 font-bold text-emerald-600">Page unlocked!</div>        }
       </div>
 
       {address ? 
-        (chainId == sepolia.id ? (
+        (chainId == megaethTestnet.id ? (
           <Link href="/gmega">
             <button className="-mt-3 mb-2 cursor-pointer bg-black text-white px-6 py-2 rounded-md hover:bg-black/80 transition-all duration-300 font-medium">
               gmega counter
@@ -57,7 +57,7 @@ export default function Home() {
         ) : 
         <div className="text-black/60">
           Almost there! <span className="text-black font-medium underline hover:cursor-pointer hover:text-black/80 transition-colors" 
-          onClick={() => {switchChain({chainId: sepolia.id})}}>
+          onClick={() => {switchChain({chainId: megaethTestnet.id})}}>
             Switch to MegaETH Testnet
           </span> to unlock the page!
         </div>
@@ -86,7 +86,7 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm text-black/60">
-            Get testnet ETH on Sepolia with the help of this faucet
+            Get testnet ETH on MegaETH Testnet with the help of this faucet
           </p>
         </Link>
 
@@ -99,7 +99,7 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm text-black/60">
-            Bridge from Sepolia to MegaETH Testnet
+            Bridge from Ethereum Sepolia to MegaETH Testnet
           </p>
         </Link>
 
