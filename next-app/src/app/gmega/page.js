@@ -17,12 +17,12 @@ const TabButton = ({ active, onClick, children }) => (
 
 export default function Counter() {
     const [activeTab, setActiveTab] = useState('mega');
-    const { switchChain, chains } = useSwitchChain();
+    const { switchChain } = useSwitchChain();
     const { writeContractAsync } = useWriteContract();
     const [txHash, setTxHash] = useState();
     
     // This will track the transaction and wait for it to be confirmed
-    const { data: receipt, isSuccess: isTxConfirmed } = useWaitForTransactionReceipt({
+    const {isSuccess: isTxConfirmed } = useWaitForTransactionReceipt({
         hash: txHash,
     });
     
@@ -109,7 +109,7 @@ export default function Counter() {
                     {isLocalContractMissing ? (
                         <div className=" rounded-2xl p-12  mb-8 min-w-[400px] min-h-[250px] flex justify-center items-center">
                             <p className="text-black text-center text-lg font-medium">
-                                Locally deployed contract not found. Refer to the readme to learn how you can deploy contracts locally
+                                Locally deployed contract not found. Refer to the README to learn how you can deploy contracts locally
                             </p>
                         </div>
                     ) : (

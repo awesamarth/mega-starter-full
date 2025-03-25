@@ -16,7 +16,7 @@ if (!projectId) {
 
 // Set up metadata
 const metadata = {
-  name: 'gambit',
+  name: 'mega-starter',
   description: 'AppKit Example',
   url: 'https://appkitexampleapp.com', // origin must match your domain & subdomain
   icons: ['https://avatars.githubusercontent.com/u/179229932']
@@ -26,7 +26,7 @@ const metadata = {
 const modal = createAppKit({
   adapters: [wagmiAdapter],
   projectId,
-  networks: [foundry, megaethTestnet],
+  networks: [megaethTestnet, foundry],
   defaultNetwork: megaethTestnet,
   metadata: metadata,
   features: {
