@@ -7,3 +7,6 @@ libs = ["lib"]
 
 [etherscan]
 ## to add here
+
+[rpc_endpoints]
+megaeth = "https://carrot.megaeth.com/rpc"
