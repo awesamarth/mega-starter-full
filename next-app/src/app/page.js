@@ -43,8 +43,11 @@ export default function Home() {
             start interacting with smart contracts right away :&#41;
           </div>
         }{" "}
-        {address && chainId == megaethTestnet.id && 
-          <div className="mt-4 font-bold text-emerald-600">Page unlocked!</div>        }
+       {address && chainId == megaethTestnet.id && 
+  <div className="mt-4 font-bold text-emerald-600">
+    Page unlocked! <span className="inline-block" style={{ filter: 'brightness(0) saturate(100%) invert(48%) sepia(79%) saturate(2476%) hue-rotate(130deg) brightness(95%) contrast(90%)' }}>👇</span>
+  </div>
+}
       </div>
 
       {address ? 
@@ -64,7 +67,7 @@ export default function Home() {
       ) : ""}
 
       <div className="grid text-center lg:max-w-5xl lg:w-full lg:grid-cols-4 lg:text-left -mb-7 gap-6">
-        <Link href="https://docs.megaeth.io/" 
+        <Link href="https://docs.megaeth.com/"  target="_blank" rel="noreferrer noopener"
           className="group rounded-lg border border-black/10 bg-white/50 px-6 py-5 transition-all duration-300 hover:bg-white hover:border-black/20 shadow-sm hover:shadow-md">
           <h2 className="mb-3 text-2xl font-bold uppercase tracking-wide">
             Docs{" "}
@@ -77,7 +80,7 @@ export default function Home() {
           </p>
         </Link>
 
-        <Link href="/faucet" 
+        <Link href="https://testnet.megaeth.com/"  target="_blank" rel="noreferrer noopener"
           className="group rounded-lg border border-black/10 bg-white/50 px-6 py-5 transition-all duration-300 hover:bg-white hover:border-black/20 shadow-sm hover:shadow-md">
           <h2 className="mb-3 text-2xl font-bold uppercase tracking-wide">
             Faucet{" "}
@@ -86,33 +89,33 @@ export default function Home() {
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm text-black/60">
-            Get testnet ETH on MegaETH Testnet with the help of this faucet
+            Get ETH on MegaETH Testnet
           </p>
         </Link>
 
-        <Link href="https://bridge.megaeth.io/" 
+        <Link href="https://mega-cli.mintlify.app/" target="_blank" rel =" noreferrer noopoener"
           className="group rounded-lg border border-black/10 bg-white/50 px-6 py-5 transition-all duration-300 hover:bg-white hover:border-black/20 shadow-sm hover:shadow-md">
           <h2 className="mb-3 text-2xl font-bold uppercase tracking-wide">
-            Bridge{" "}
+            CLI {" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               →
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm text-black/60">
-            Bridge from Ethereum Sepolia to MegaETH Testnet
+            A comprehensive guide on how to use Mega CLI
           </p>
         </Link>
 
-        <Link href="https://megaeth.com/" 
+        <Link href="https://megaeth.com/" target="_blank" rel="noreferrer noopener"
           className="group rounded-lg border border-black/10 bg-white/50 px-6 py-5 transition-all duration-300 hover:bg-white hover:border-black/20 shadow-sm hover:shadow-md">
           <h2 className="mb-3 text-2xl font-bold uppercase tracking-wide">
-            Explore{" "}
+            More {" "}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               →
             </span>
           </h2>
           <p className="m-0 max-w-[30ch] text-sm text-black/60">
-            Learn more about the MegaETH ecosystem
+           Visit MegaETH's website and dive into the rabbithole
           </p>
         </Link>
       </div>
